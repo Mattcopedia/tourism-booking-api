@@ -1,0 +1,12 @@
+# all these files wont be uploaded to git
+#you need to add all the files to the staging area before they are committed so we can 
+#choose what to commit and stage
+#a commit is like a snapshot of a code at a certain point in time. 
+# git remote add origin git@github.com:Mattcopedia/tourism-booking-api.git
+#remote branch is called origin 
+node_modules/
+.cache 
+*.env 
+config.env 
+public/js/bundle.js
+public/js/bundle.js.map
