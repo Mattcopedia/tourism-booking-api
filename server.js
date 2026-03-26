@@ -13,18 +13,18 @@ process.on('uncaughtException', err => {
 dotenv.config({ path: './config.env' });
 const app = require('./app');
 
-const DB = process.env.DATABASE.replace(
-  '<PASSWORD>',
-  process.env.DATABASE_PASSWORD
-);
+const DB =
+  process.env.NODE_ENV === 'production'
+    ? process.env.DATABASE.replace('<PASSWORD>', process.env.DATABASE_PASSWORD)
+    : process.env.DATABASE_LOCAL;
 
-mongoose
-  // .connect(DB, { for mongoDB atlas cluster.
-  .connect(process.env.DATABASE_LOCAL, {
+mongoose //for mongoDB atlas cluster.
+  .connect(DB, {
+    // .connect(process.env.DATABASE_LOCAL, {
     //for mongoDB compass.
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useFindAndModify: false
+    useFindAndModify: false,
+    useUnifiedTopology: true,
+    useNewUrlParser: true
   })
   .then(() => console.log('DB connection successful!'));
 
